@@ -91,6 +91,11 @@ function init(){
 	box = new THREE.Mesh(boxG, new THREE.MeshNormalMaterial());
 	scene.add(box);
 	*/
+	boxG = new THREE.CylinderGeometry(10,10,20,20);
+	box = new THREE.Mesh(boxG, new THREE.MeshNormalMaterial());
+	box.position.set(0,10,0);
+	scene.add(box);
+	
 	geometry = new THREE.Geometry();
 	geometry.vertices.push(
 		new THREE.Vector3(32,0,0),
