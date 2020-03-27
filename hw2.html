@@ -28,28 +28,28 @@ var pucklight;
 
 	
 class Puck{
-		constructor(rtop,rbottom,height,radialSegments,force,vel,pos,color){
-	  	this.rtop = rtop;
-	    this.rbottom = rbottom;
-	    this.height = height;
-	    this.radialSegments = radialSegments;
-	    this.combine = new THREE.Mesh(new THREE.CylinderGeometry(this.rtop,this.rbottom,this.height,this.radialSegments),new THREE.MeshBasicMaterial({color:color}));
-	    this.combine.position.y = 2;
-	    this.force = new THREE.Vector3(force.x,force.y,force.z);
-	    this.vel = new THREE.Vector3(vel.x,vel.y,vel.z);
-	    this.pos = new THREE.Vector3(pos.x,pos.y,pos.z);
-	    this.puckLight = new THREE.PointLight(color,1,100);
-	    scene.add(this.puckLight);
+	constructor(rtop,rbottom,height,radialSegments,force,vel,pos,color){
+	this.rtop = rtop;
+	this.rbottom = rbottom;
+	this.height = height;
+	this.radialSegments = radialSegments;
+	this.combine = new THREE.Mesh(new THREE.CylinderGeometry(this.rtop,this.rbottom,this.height,this.radialSegments),new THREE.MeshBasicMaterial({color:color}));
+	this.combine.position.y = 2;
+	this.force = new THREE.Vector3(force.x,force.y,force.z);
+	this.vel = new THREE.Vector3(vel.x,vel.y,vel.z);
+	this.pos = new THREE.Vector3(pos.x,pos.y,pos.z);
+	this.puckLight = new THREE.PointLight(color,1,100);
+	scene.add(this.puckLight);
 	 	}
 }
 class Wall{
-		constructor(length,width,height,pointx,pointy,pointz,normalx,normaly,normalz){
-	  	this.length = length;
-	    this.width = width;
-	    this.height = height;
-	    this.combine = new THREE.Mesh(new THREE.BoxGeometry(this.length,this.width,this.height),new THREE.MeshPhongMaterial());
-	    this.combine.point = new THREE.Vector3(pointx,pointy,pointz);
-	    this.combine.normal = new THREE.Vector3(normalx,normaly,normalz);
+	constructor(length,width,height,pointx,pointy,pointz,normalx,normaly,normalz){
+	this.length = length;
+	this.width = width;
+	this.height = height;
+	this.combine = new THREE.Mesh(new THREE.BoxGeometry(this.length,this.width,this.height),new THREE.MeshPhongMaterial());
+	this.combine.point = new THREE.Vector3(pointx,pointy,pointz);
+	this.combine.normal = new THREE.Vector3(normalx,normaly,normalz);
 	    }
 }
 
@@ -156,25 +156,25 @@ function animate() {
   var distance,distsq;
   // Euler's method
   for(i=0;i<pucks.length;i++){
-	puck = pucks[i];
-	puck.vel.add(puck.force.clone().multiplyScalar(dt));
-	puck.pos.add(puck.vel.clone().multiplyScalar(dt));
- 	puck.combine.position.copy(puck.pos);
-	puck.combine.position.y += 2;
-	puck.puckLight.position.copy(puck.combine.position);
-	puck.puckLight.position.y += 10;
+		puck = pucks[i];
+		puck.vel.add(puck.force.clone().multiplyScalar(dt));
+		puck.pos.add(puck.vel.clone().multiplyScalar(dt));
+		puck.combine.position.copy(puck.pos);
+		puck.combine.position.y += 2;
+		puck.puckLight.position.copy(puck.combine.position);
+		puck.puckLight.position.y += 10;
   }
   
   //collision detection
   for(i=0;i<walls.length;i++){
-  for(j=0;j<pucks.length;j++){
-	  wall = walls[i];
-	  puck = pucks[j];
+	for(j=0;j<pucks.length;j++){
+		wall = walls[i];
+		puck = pucks[j];
 	      if(puck.pos.clone().sub(wall.combine.point).dot(wall.combine.normal) < eps + 12){
-	      	var vN = wall.combine.normal.clone().multiplyScalar(puck.vel.dot(wall.combine.normal));
+			var vN = wall.combine.normal.clone().multiplyScalar(puck.vel.dot(wall.combine.normal));
 	        var vT = puck.vel.clone().sub(vN);
 	        puck.vel.copy(vT.add(vN.multiplyScalar(-cR)));
-	       Sounds.play();
+			Sounds.play();
 	      }
 	  }
   }
