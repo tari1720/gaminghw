@@ -125,24 +125,23 @@ function init() {
   
   wall = new Wall(10,20,200,100,0,0,-1,0,0);
   wall.combine.position.set(105,10,0);
-  walls.push(wall);
   scene.add(wall.combine);
+  walls.push(wall);
+ 
+  wall = new Wall(200,20,10,0,0,100,0,0,-1);
+  wall.combine.position.set(0,10,105);
+  scene.add(wall.combine);
+  walls.push(wall);
+   
+  wall = new Wall(200,20,10,0,0,-100,0,0,1);
+  wall.combine.position.set(0,10,-105);
+  scene.add(wall.combine);
+  walls.push(wall);
   
   wall = new Wall(10,20,200,-100,0,0,1,0,0);
   wall.combine.position.set(-105,10,0);
-  walls.push(wall);
   scene.add(wall.combine);
-  
-  wall = new Wall(200,20,10,0,0,100,0,0,-1);
-  wall.combine.position.set(0,10,105);
   walls.push(wall);
-  scene.add(wall.combine);
-  
-  wall = new Wall(200,20,10,0,0,-100,0,0,1);
-  wall.combine.position.set(0,10,-105);
-  walls.push(wall);
-  scene.add(wall.combine);
-  
   
 }
 
